@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const nimRoutes = require('./routes/nim');
-const { connectToDB, getDB } = require('./db');
+const { connectToDB, getDB } = require('./config/db');
 
 var app = express();
 
@@ -27,8 +27,8 @@ app.use('/nim', nimRoutes);
 
 // Connect to the database before starting the server
 connectToDB().then(() => {
-  app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+  app.listen(3001, () => {
+    console.log('Server running on http://localhost:3001');
   });
 });
 

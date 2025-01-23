@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDB } = require('../db');
+const { getDB } = require('../config/db');
 const router = express.Router();
 
 // Game state
