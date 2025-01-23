@@ -13,7 +13,7 @@ function computeNimSum(heaps) {
 
 // Check if game is over
 function isGameOver(heaps) {
-  return heaps.every((heap) => heap === 0);
+  return heaps.every(heap => heap === 0);
 }
 
 
@@ -80,14 +80,22 @@ router.post('/move', async (req, res) => {
 
     // Update the heap
     heaps[heapIndex] -= removeCount;
+    let nextPlayer;
+    let message;
+    if (isGameOver(heaps)){
+      message = `Game Over, Player ${currentPlayer} loses`;
+      nextPlayer = currentPlayer;
+    }
+    else {
+      // Update the current player
+      nextPlayer = currentPlayer === 1 ? 2 : 1;
+      message = 'Move successful';
+    }
 
-    // Update the current player
-    const nextPlayer = currentPlayer === 1 ? 2 : 1;
-
+    
     // Update the game state in the database
     await heapsCollection.updateOne({}, { $set: { heaps, currentPlayer: nextPlayer } });
-
-    res.json({ message: 'Move successful', heaps, currentPlayer: nextPlayer });
+    res.json({ message: message, heaps, currentPlayer: nextPlayer });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to make the move' });
