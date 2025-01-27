@@ -1,13 +1,16 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from 'eslint-config-eslint';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import { config as tseslintConfig } from '@typescript-eslint/eslint-plugin'; // Fix import for TypeScript ESLint plugin
 
-export default tseslint.config(
+export default tseslintConfig(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [
+      'eslint:recommended', // Correct config for JS
+      'plugin:@typescript-eslint/recommended', // Correct config for TypeScript
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -23,13 +26,15 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      indent: [
-        2,
-        2,
+      'semi': ['error', 'never'],
+      '@typescript-eslint/semi': ['error', 'never'],
+      'indent': [
+        'error',
+        2, // Enforcing 2-space indentation
         {
           SwitchCase: 1,
         },
       ],
     },
   },
-)
+);
