@@ -23,6 +23,13 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      indent: [
+        2,
+        2,
+        {
+          SwitchCase: 1,
+        },
+      ],
     },
   },
 )
