@@ -15,8 +15,8 @@ const MainMenu = () => {
           <h1 className="text-9xl font-montserrat text-figma-brown">Nim</h1>
 
           <div className="flex flex-col gap-4 mt-8 ">
-            <GeneralButton text='Singleplayer' onClick={() => console.log('Singleplayer Clicked')} variant='primary' />
-            <GeneralButton text='Multiplayer' onClick={() => console.log('Multiplayer Clicked')} variant='primary' />
+            <GeneralButton text='singleplayer' />
+            <GeneralButton text='multiplayer' />
           </div>
         </div>
     </div>
